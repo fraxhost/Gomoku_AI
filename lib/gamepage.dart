@@ -9,21 +9,49 @@ class Gamepage extends StatefulWidget {
 }
 
 class _GamepageState extends State<Gamepage> {
-  List<Color> _colors = <Color>[Colors.white, Colors.black];
 
-  Color chooseColor(int i) {
-    if (i == 0)
-      return Colors.white;
-    else if (i == 1)
-      return Colors.black;
+  Ink chooseColor(int i) {
+    if (i == 0) {
+      return Ink(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.white,Colors.grey],
+                stops: [.4,.85]
+              )
+          )
+      );
+    }
+    else if (i == 1){
+      return Ink(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.black38,Colors.black],
+                  stops: [.15,.5]
+              )
+          )
+      );
+    }
+
     else
-      return Colors.red[200].withOpacity(0.3);
+      return Ink(
+        //color: Color(0xffC33764).withOpacity(.2),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xffff00cc).withOpacity(.3), Color(0xff333399).withOpacity(.6)]),
+        ),
+    );
+
   }
 
   @override
   Widget build(BuildContext context) {
     new BoardState().run();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('GOMOKU'),
@@ -66,21 +94,23 @@ class _GamepageState extends State<Gamepage> {
                                 Container(
                                   child: Container(
                                     width:
-                                        MediaQuery.of(context).size.width * .09,
+                                    MediaQuery.of(context).size.width * .09,
                                     height:
-                                        MediaQuery.of(context).size.width * .09,
+                                    MediaQuery.of(context).size.width * .09,
                                     padding: EdgeInsets.symmetric(
                                         vertical: 2.0, horizontal: 2.0),
                                     child: RaisedButton(
                                       elevation: 10.0,
                                       splashColor: Colors.white10,
-                                      color:
-                                          chooseColor(BoardState.board[i][j]),
+                                      child: chooseColor(BoardState.board[i][j]),
+                                      //color: Colors.red[200].withOpacity(.3),
+                                     // chooseColor(BoardState.board[i][j]),
                                       padding: EdgeInsets.symmetric(
                                           vertical: 2.0, horizontal: 2.0),
                                       shape: new RoundedRectangleBorder(
                                           borderRadius:
-                                              new BorderRadius.circular(3.0)),
+                                          new BorderRadius.circular(3.0),
+                                      ),
                                       onPressed: () {
                                         setState(() {
                                           if (BoardState.board[i][j] == null &&
@@ -89,7 +119,7 @@ class _GamepageState extends State<Gamepage> {
 
                                             BoardState.turn++;
                                           } else if (BoardState.board[i][j] ==
-                                                  null &&
+                                              null &&
                                               BoardState.turn % 2 == 1) {
                                             BoardState.board[i][j] = 1;
                                             BoardState.turn++;
@@ -112,3 +142,4 @@ class _GamepageState extends State<Gamepage> {
     );
   }
 }
+
