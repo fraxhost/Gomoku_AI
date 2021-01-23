@@ -1,5 +1,4 @@
-
-import 'package:go_game/gameCore/goBoard.dart';
+import 'package:go_game/boardstate.dart';
 
 class GoLogic{
 
@@ -7,7 +6,7 @@ class GoLogic{
 
   bool fiveInA_row(int player){
 
-    GoBoard board = new GoBoard();
+    BoardState board = new BoardState();
     List<List<int>> currentBoard = board.getBoard();
     int stones=0;
 
@@ -36,7 +35,7 @@ class GoLogic{
 
   bool fiveInA_column(int player){
 
-    GoBoard board = new GoBoard();
+    BoardState board = new BoardState();
 
     List<List<int>> currentBoard = board.getBoard();
     int stones=0;
@@ -65,7 +64,7 @@ class GoLogic{
 
   bool fiveInA_leftDiagonal(int player){
 
-    GoBoard board = new GoBoard();
+    BoardState board = new BoardState();
 
     List<List<int>> currentBoard = board.getBoard();
     int stones=0;
@@ -93,7 +92,7 @@ class GoLogic{
   }
   bool fiveInA_RightDiagonal(int player){
 
-    GoBoard board = new GoBoard();
+    BoardState board = new BoardState();
 
     List<List<int>> currentBoard = board.getBoard();
     int stones=0;
@@ -120,4 +119,24 @@ class GoLogic{
     return false;
   }
 
+  bool findTwoOpenEndInRow(int stones, int playerStone){
+
+    for(int i=0;i<rows;i++){
+      for(int r= 0; r < rows-stones-1; r++){
+        bool pattern = true;
+        if(BoardState.board[i][r]==null && BoardState.board[i][r+stones+1]==null){
+
+          for(int k= r+1; k <= r+stones; k++){
+            if(BoardState.board[i][k] != playerStone){
+              pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+      }
+    }
+   return false;
+  }
 }
