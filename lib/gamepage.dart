@@ -52,7 +52,6 @@ class _GamepageState extends State<Gamepage> {
   @override
   Widget build(BuildContext context) {
     new BoardState().run();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('GOMOKU'),
