@@ -123,9 +123,9 @@ class GoLogic{
 
     for(int i=0;i<rows;i++){
       for(int r= 0; r < rows-stones-1; r++){
-        bool pattern = true;
-        if(BoardState.board[i][r]==null && BoardState.board[i][r+stones+1]==null){
 
+        if(BoardState.board[i][r]==null && BoardState.board[i][r+stones+1]==null){
+          bool pattern = true;
           for(int k= r+1; k <= r+stones; k++){
             if(BoardState.board[i][k] != playerStone){
               pattern = false;
@@ -138,5 +138,37 @@ class GoLogic{
       }
     }
    return false;
+  }
+
+  bool findOneOpenEndInRow(int stones, int playerStone){
+
+    for(int r=0; r < rows; r++){
+      for(int sp=0; sp < rows-stones; sp++){
+
+        if(BoardState.board[r][sp] == null){
+          bool pattern = true;
+            for(int k= sp + 1; k <= sp + stones; sp++){
+                if(BoardState.board[r][sp] != playerStone){
+                  pattern = false;
+                  break;
+                }
+            }
+            if(pattern)
+              return true;
+        }
+      }
+      if(BoardState.board[r][rows-1] == null){
+        bool pattern = true;
+        for(int bs= rows-2; bs>=rows-stones-1; bs--){
+            if(BoardState.board[r][bs] != playerStone){
+              pattern = false;
+              break;
+            }
+        }
+        if(pattern)
+          return true;
+      }
+    }
+    return false;
   }
 }
