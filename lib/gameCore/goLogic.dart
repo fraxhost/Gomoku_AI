@@ -201,12 +201,12 @@ class GoLogic{
   bool findOneOpenEndInRow(int stones, int playerStone){
 
     for(int r=0; r < rows; r++){
-      for(int col =0; col < rows-stones; col++){
+      for(int col =0; col < coloumns-stones; col++){
 
         if(BoardState.board[r][col] == null){
           bool pattern = true;
             for(int k= col + 1; k <= col + stones; col++){
-                if(BoardState.board[r][col] != playerStone){
+                if(BoardState.board[r][k] != playerStone){
                   pattern = false;
                   break;
                 }
@@ -215,12 +215,108 @@ class GoLogic{
               return true;
         }
       }
-      for(int colRev = rows-1; colRev >= rows-stones; colRev--){
+      for(int colRev = coloumns-1; colRev >= coloumns-stones; colRev--){
         if(BoardState.board[r][colRev]==null){
           bool pattern = true;
           for(int k = colRev-stones; k < colRev; k++){
-            if(BoardState.board[r][colRev] != playerStone){
+            if(BoardState.board[r][k] != playerStone){
               pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool findOneOpenEndInColumn(int stones, int playerStone){
+
+    for(int col=0; col < coloumns; col++){
+      for(int r =0; r < rows-stones; r++){
+
+        if(BoardState.board[r][col] == null){
+          bool pattern = true;
+          for(int k= r + 1; k <= r + stones; k++){
+            if(BoardState.board[k][col] != playerStone){
+              pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+      }
+      for(int rowRev = rows-1; rowRev >= rows-stones; rowRev--){
+        if(BoardState.board[rowRev][col]==null){
+          bool pattern = true;
+          for(int k = rowRev-stones; k < rowRev; k++){
+            if(BoardState.board[k][col] != playerStone){
+              pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool findOneOpenEndInlLeftDiagonal(int stones, int playerStone){
+
+    for(int r = 0; r < rows-stones; r++){
+      for(int col = stones; col < coloumns; col++){
+        if(BoardState.board[r][col] == null){
+          bool pattern = true;
+          for(int k = 1; k <= stones;k++) {
+            if(BoardState.board[r+k][col-k] != playerStone){
+              pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+        else if(BoardState.board[r+stones][col-stones] == null){
+          bool pattern = true;
+          for(int k= 0; k<stones; k++){
+            if(BoardState.board[r+k][col-k] != playerStone){
+              pattern =false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool findOneOpenEndInlRightDiagonal(int stones, int playerStone){
+
+    for(int r = 0; r < rows-stones; r++){
+      for(int col = 0; col < coloumns-stones; col++){
+        if(BoardState.board[r][col] == null){
+          bool pattern = true;
+          for(int k = 1; k <= stones;k++) {
+            if(BoardState.board[r+k][col-k] != playerStone){
+              pattern = false;
+              break;
+            }
+          }
+          if(pattern)
+            return true;
+        }
+        else if(BoardState.board[r+stones][col+stones] == null){
+          bool pattern = true;
+          for(int k= 0; k<stones; k++){
+            if(BoardState.board[r+k][col+k] != playerStone){
+              pattern =false;
               break;
             }
           }
