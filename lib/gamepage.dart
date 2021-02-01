@@ -170,7 +170,7 @@ class _GamepageState extends State<Gamepage> {
                               blurRadius: 20.0,
                               spreadRadius: 5.0,
                             )
-                            //offset: Offset(10.0, 20.0))
+                          
                           ]),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
