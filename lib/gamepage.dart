@@ -1,9 +1,10 @@
 import 'dart:io';
-
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_game/gameCore/goLogic.dart';
 import 'package:go_game/gameCore/minimax.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 import 'boardstate.dart';
 
@@ -13,6 +14,8 @@ class Gamepage extends StatefulWidget {
 }
 
 class _GamepageState extends State<Gamepage> {
+
+  static AudioCache player = new AudioCache();
 
   GoLogic _goLogic = new GoLogic();
   BoardState _boardState = new BoardState();
@@ -86,10 +89,25 @@ class _GamepageState extends State<Gamepage> {
         )
     );
   }
+  bool first_move = false;
+  Random random = new Random();
+
   Future AI_makeYourMove() async{
 
-    MiniMax mnx= new MiniMax();
-    mnx.getOptimalMove_AI();
+    if(!first_move){
+      int i = random.nextInt(10);
+      int j = random.nextInt(10);
+      if(BoardState.board[i][j]== null)
+      _boardState.placeStone(i, j, 0);
+      else
+        _boardState.placeStone(i-1, j+1, 0);
+      
+      first_move = true;
+    }
+    else {
+      MiniMax mnx = new MiniMax();
+      mnx.getOptimalMove_AI();
+    }
   }
 
   void handleGameLoop(int i, int j) async{
@@ -100,6 +118,8 @@ class _GamepageState extends State<Gamepage> {
         _boardState.placeStone(i, j, BoardState.turn % 2);
         dialogueGameOver(_boardState.tileState(i, j));
       }
+      else
+        return;
 
         if(!gameOver) {
           await AI_makeYourMove();
@@ -181,19 +201,9 @@ class _GamepageState extends State<Gamepage> {
                                           new BorderRadius.circular(3.0),
                                         ),
                                         onPressed: () {
+                                         player.play('audio/tile.wav');
                                           setState(() {
-                                            /*if (BoardState.board[i][j] == null &&
-                                               BoardState.turn % 2 == 0) {
-                                             AI_makeYourMove();
-                                             dialogueGameOver(0);
-                                           } else if (BoardState.board[i][j] ==
-                                               null &&
-                                               BoardState.turn % 2 == 1) {*/
                                             handleGameLoop(i, j);
-                                            //print(BoardState.board);
-                                            //}
-                                            //handleGameLoop(i,j);
-                                            //print(BoardState.board);
                                           });
                                         },
                                       ),
