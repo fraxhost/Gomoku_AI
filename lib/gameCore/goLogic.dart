@@ -22,11 +22,7 @@ class GoLogic{
               break;
           }
           if(stones == 5){
-            print('row win');
-            if(BoardState.board[i][j] == null)
-              return i*10+j;
-            else
-              return i*10+j+5;
+            return i*10+j;
           }
           else
             continue;
@@ -260,7 +256,7 @@ class GoLogic{
             }
           }
           if(pattern) {
-           // print('col 4 1 found');
+           //print('col 4 1 found');
             return true;
           }
         }
@@ -276,7 +272,7 @@ class GoLogic{
             }
           }
           if(pattern) {
-           // print('col 4 1 found');
+           print('col 4 1 found');
             return true;
           }
         }
@@ -358,16 +354,16 @@ class GoLogic{
     board = cBoard;
     //return (findTwoOpenEndInColumn(stones, playerStone) || findTwoOpenEndInRightDiagonal(stones, playerStone) ||
       //  findTwoOpenEndInLeftDiagonal(stones, playerStone));
-    int critcalMove = findTwoOpenEndInRow(3,1);
+    int critcalMove = findTwoOpenEndInRow(stones,playerStone);
     if(critcalMove>-1)
       return critcalMove;
-    critcalMove = findTwoOpenEndInColumn(3,1);
+    critcalMove = findTwoOpenEndInColumn(stones,playerStone);
     if(critcalMove>-1)
       return critcalMove;
-    critcalMove = findTwoOpenEndInLeftDiagonal(3,1);
+    critcalMove = findTwoOpenEndInLeftDiagonal(stones,playerStone);
     if(critcalMove>-1)
       return critcalMove;
-    critcalMove = findTwoOpenEndInRightDiagonal(3,1);
+    critcalMove = findTwoOpenEndInRightDiagonal(stones,playerStone);
     if(critcalMove>-1)
       return critcalMove;
 
