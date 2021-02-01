@@ -1,3 +1,8 @@
+/*
+ * References: https://blog.theofekfoundation.org/artificial-intelligence/2015/12/11/minimax-for-gomoku-connect-five/*/
+ */
+
+ */
 import 'package:go_game/boardstate.dart';
 
 class GoLogic{
@@ -352,8 +357,6 @@ class GoLogic{
   int searchForTwoOpenEnd(int stones, int playerStone, List<List<int>> cBoard){
 
     board = cBoard;
-    //return (findTwoOpenEndInColumn(stones, playerStone) || findTwoOpenEndInRightDiagonal(stones, playerStone) ||
-      //  findTwoOpenEndInLeftDiagonal(stones, playerStone));
     int critcalMove = findTwoOpenEndInRow(stones,playerStone);
     if(critcalMove>-1)
       return critcalMove;
@@ -373,8 +376,6 @@ class GoLogic{
   bool searchForOneOpenEnd(int stones, int playerStone, List<List<int>> cBoard){
 
     board = cBoard;
-   // return (findOneOpenEndInColumn(stones, playerStone) || findOneOpenEndInRightDiagonal(stones, playerStone)||
-   // findOneOpenEndInLeftDiagonal(stones, playerStone));
     return (findOneOpenEndInRow(stones, playerStone) || findOneOpenEndInColumn(stones, playerStone) ||
         findOneOpenEndInLeftDiagonal(stones, playerStone) || findOneOpenEndInRightDiagonal(stones, playerStone));
   }
@@ -425,29 +426,7 @@ class GoLogic{
     int sign = (AI_turn)? 1 : -1;
     int myStone = (AI_turn)? 0 : 1;
     int opponentStone = (myStone == 0)? 1 : 0;
-
-    int value =0;
-
-    /*value += (searchForTwoOpenEnd(4, 0))?100000*1:1;
-    value += (searchForOneOpenEnd(4, 0))?550000*1:1;
-    value += (searchForTwoOpenEnd(3, 0))?540*1:1;
-    value += (searchForOneOpenEnd(3, 0))?50*1:1;
-    value += (searchForTwoOpenEnd(2, 0))?10*1:1;
-    value += (searchForOneOpenEnd(2, 0))?5*1:1;
-
-    value -= (searchForTwoOpenEnd(4, 1))?101000*1:1;
-    value -= (searchForOneOpenEnd(4, 1))?510*1:1;
-    value -= (searchForTwoOpenEnd(3, 1))?530*1:1;
-    value -= (searchForOneOpenEnd(3, 1))?60*1:1;
-    value -= (searchForTwoOpenEnd(2, 1))?15*1:1;
-    value -= (searchForOneOpenEnd(2, 1))?8*1:1;
-
-    return value;
-    if(highFive(0))
-      return 1000000000;
-    if(highFive(1))
-      return -1000000000;*/
-
+    
     if(searchForTwoOpenEnd(4, myStone,board)>-1)
       return sign*100000000;
     if(searchForTwoOpenEnd(4, opponentStone,board)>-1)
