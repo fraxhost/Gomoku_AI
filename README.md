@@ -1,10 +1,11 @@
 # Gomoku AI
 
 ## Overview
-This project involves the development of an AI for the board game Gomoku using Flutter. The AI utilizes the minimax algorithm to provide a challenging opponent for human players.
+This project involves the development of an AI for the board game Gomoku using Flutter. The AI utilizes the minimax algorithm and alpha beta pruning to provide a challenging opponent for human players.
 
 ## Features
 - **Minimax Algorithm**: Implements the minimax algorithm with situation evaluation to make strategic moves.
+- **Alpha Beta Pruning**: Enhances the minimax algorithm by pruning unnecessary branches, improving efficiency.
 - **Flutter Interface**: Provides a user-friendly interface for playing Gomoku against the AI.
 - **Cross-Platform**: Runs on both Android and iOS devices thanks to Flutter.
 
