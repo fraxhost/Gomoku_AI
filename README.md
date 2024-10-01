@@ -1,16 +1,40 @@
-# gomokuai
+# Gomoku AI
 
-A new Flutter application.
+## Overview
+This project involves the development of an AI for the board game Gomoku using Flutter. The AI utilizes the minimax algorithm to provide a challenging opponent for human players.
 
-## Getting Started
+## Features
+- **Minimax Algorithm**: Implements the minimax algorithm with situation evaluation to make strategic moves.
+- **Flutter Interface**: Provides a user-friendly interface for playing Gomoku against the AI.
+- **Cross-Platform**: Runs on both Android and iOS devices thanks to Flutter.
 
-This project is a starting point for a Flutter application.
+## Installation
+To set up and run the project, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/gomoku-ai.git
+    cd gomoku-ai
+    ```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+2. Install Flutter dependencies:
+    ```bash
+    flutter pub get
+    ```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Run the app:
+    ```bash
+    flutter run
+    ```
+
+## Usage
+1. Start the app on your device or emulator.
+2. Play Gomoku against the AI through the Flutter interface.
+3. The AI will use the minimax algorithm to make its moves.
+
+## Technologies Used
+- **Flutter**: For building the cross-platform user interface.
+- **Minimax Algorithm**: For strategic decision-making in the AI.
+
+## Contact
+For any questions or feedback, please contact Ahmed Ryan at ahmedryanfaiyaz@gmail.com.
